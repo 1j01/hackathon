@@ -6,7 +6,7 @@
 	<body>
 		<style>
 			body {
-				font-family: "Comic Sans MS", sans-serif;
+				font-family: sans-serif;
 				background: url(https://wallpaperscraft.com/image/board_black_line_texture_background_wood_55220_1920x1080.jpg);
 				color: white;
 				display: flex;
@@ -22,6 +22,12 @@
 			}
 			.bubble {
 			    margin-bottom: 0.3em;
+			    background: rgba(255, 255, 255, 0.2);
+			    border-radius: 0.2rem;
+			    padding: 0.3rem;
+			    width: auto;
+			    max-width: 40em;
+			    word-wrap: break-word;
 			}
 			.log {
 				overflow: auto;
@@ -35,16 +41,20 @@
 				flex: 10%;
 			}
 			h1 {
-				text-decoration: underline;
+				text-align: center;
 				margin: 0;
+				background: #383838;
+				border-bottom: 3px solid white;
 			}
 			h1, .log, .input-area {
-				padding: 0.5rem;
+				padding: 0.8rem;
 			}
 		</style>
 		<h1>MLG CHAT 2K16</h1>
 		<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 		<script src="lib/coffee-script.js"></script>
+		<script src="Bubble.coffee" type="text/coffeescript"></script>
+		<script src="DistanceConstraint.coffee" type="text/coffeescript"></script>
 		<script src="client.coffee" type="text/coffeescript"></script>
 	</body>
 </html>
