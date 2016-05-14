@@ -1,0 +1,13 @@
+{
+  "name": "hackathon-chat-server",
+  "description": "Yep",
+  "version": "0.0.0",
+  "dependencies": {
+    "coffee-script": "^1.10.0",
+    "express": "^4.13.4",
+    "socket.io": "^1.4.6"
+  },
+  "scripts": {
+    "start": "coffee server.coffee"
+  }
+}
