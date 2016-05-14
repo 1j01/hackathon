@@ -1,16 +1,18 @@
 
 express = require("express")
 app = express()
-io = require("socket.io")(1326)
 http = require('http').Server(app)
+io = require("socket.io")(http)
 
 app.use(express.static('.'))
 
 app.get '/', (req, res)->
 	res.sendFile "#{__dirname}/index.html"
 
-http.listen 3000, ->
-	console.log 'listening on *:3000'
+port = process.env.PORT ? 3000
+ip = process.env.IP ? "localhost"
+http.listen port, ip, ->
+	console.log "listening on #{ip}:#{port}"
 
 bubbles = []
 clients = []
