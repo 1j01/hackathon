@@ -1,22 +1,53 @@
 
-# host = if location.hostname is "localhost" then "localhost:1326" else "https://vczmpwyabn.localtunnel.me"
-# host = if location.hostname is "localhost" then "localhost:1326" else "tcp://0.tcp.ngrok.io:12812"
-#host = if location.hostname is "localhost" then "localhost:1326" else "http://25736b14.ngrok.io"
-
-# host = "#{location.hostname}:1326"
-#console.log host
-# socket = io.connect(host)
 socket = io()
 
+nick = ""
+
+log = document.createElement "div"
+document.body.appendChild log
+log.classList.add "log"
+
+displayBubble = ({text, from})->
+	console.log "recieved bubble", {text, from}
+	bubble = document.createElement "div"
+	log.appendChild bubble
+	bubble.title = "from #{from or "anonymous"}"
+	bubble.textContent = text
+	bubble.classList.add "bubble"
+	log.scrollTop = log.scrollHeight
+
+socket.on "bubbles", (bubbles)->
+	displayBubble(bubble) for bubble in bubbles
+
 socket.on "bubble", (bubble)->
-	console.log "BUBBLBBBLB", bubble
+	displayBubble(bubble)
+
+input_area = document.createElement "div"
+document.body.appendChild input_area
+input_area.classList.add "input-area"
+
+nick_input = document.createElement "input"
+input_area.appendChild nick_input
+nick_input.classList.add "nick"
+nick_input.placeholder = "Nickname"
 
 input = document.createElement "input"
-document.body.appendChild input
+input_area.appendChild input
+input.classList.add "message"
+
+try
+	if localStorage.nick
+		nick = localStorage.nick
+		nick_input.value = nick
+		socket.emit "nick", nick
 
 input.onkeydown = (e)->
 	if e.keyCode is 13
 		text = input.value
-		socket.emit "bubble", text
+		socket.emit "bubble", {text, from: nick}
 		input.value = ""
 
+nick_input.onchange = (e)->
+	nick = nick_input.value
+	socket.emit "nick", nick
+	localStorage.nick = nick

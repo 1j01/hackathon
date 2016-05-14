@@ -26,6 +26,6 @@ io.on "connection", (client)->
 	client.on "bubble", (bubble)->
 		console.log "recieved bubble", bubble
 		bubbles.push bubble
-		io.emit "bubbles", bubbles
+		# io.emit "bubbles", bubbles
 		io.emit "bubble", bubble
 
