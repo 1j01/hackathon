@@ -24,7 +24,8 @@ io.on "connection", (client)->
 		client.nick = nick
 		io.emit "client-nicks", (client.nick for client in clients)
 	client.on "bubble", (bubble)->
-		console.log "recieved bubble", bubble
+		bubble.id = bubbles.length + "-" + Math.random()
+		console.log "bubble", bubble
 		bubbles.push bubble
 		# io.emit "bubbles", bubbles
 		io.emit "bubble", bubble

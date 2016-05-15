@@ -3,15 +3,28 @@ socket = io()
 
 nick = "nick"
 bubbles = []
+bubbles_by_id = {}
 constraints = []
 
 log = document.createElement "div"
 document.body.appendChild log
 log.classList.add "log"
 
-displayBubble = ({text, from})->
+respond = (to_id)->
+	bubble = new Bubble({text: "", from: nick, parent: to_id})
+	bubble.text_el.setAttribute("contenteditable", "true")
+	bubbles.push bubble
+	constraints.push(new DistanceConstraint(
+		bubble
+		bubbles_by_id[to_id]
+		40
+	))
+	log.appendChild(bubble.element)
+
+displayBubble = ({text, from, id})->
 	console.log "recieved bubble", {text, from}
-	bubble = new Bubble({text, from})
+	bubble = new Bubble({text, from, respond})
+	bubbles_by_id[id] = bubble
 	bubbles.push bubble
 	if bubbles.length >= 2
 		constraints.push(new DistanceConstraint(
@@ -19,6 +32,13 @@ displayBubble = ({text, from})->
 			bubbles[bubbles.length - 2]
 			40
 		))
+	else
+		constraints.push(new DistanceConstraint(
+			bubble
+			{x: 0, y: 0}
+			40
+		))
+		
 	log.appendChild bubble.element
 	log.scrollTop = log.scrollHeight
 

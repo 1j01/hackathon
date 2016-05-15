@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Chat Client Y'all</title>
+		<title>MLG Chat 2K16</title>
 	</head>
 	<body>
 		<style>
@@ -19,15 +19,22 @@
 			}
 			input {
 				width: 100%;
+				background: #2d2d2d;
+				color: white;
+				font-size: 1.4em;
+				padding: 0.2rem;
+				border: 1px solid rgba(255, 255, 255, 0.5);
+				border-top: 2px solid rgba(255, 255, 255, 0.5);
 			}
 			.bubble {
 			    margin-bottom: 0.3em;
-			    background: rgba(255, 255, 255, 0.2);
-			    border-radius: 0.2rem;
-			    padding: 0.3rem;
-			    width: auto;
+			    background: rgba(35,35,35,0.6);
+			    border-radius: 2rem;
+			    padding: 1rem;
+			    /*width: 10rem;*/
 			    max-width: 40em;
 			    word-wrap: break-word;
+			    position: relative;
 			}
 			.log {
 				overflow: auto;
@@ -36,18 +43,42 @@
 			.input-area {
 				display: flex;
 				flex: 0 0 auto;
+				margin: -1px;
 			}
 			.nick {
 				flex: 10%;
+				text-align: center;
 			}
 			h1 {
 				text-align: center;
 				margin: 0;
-				background: #383838;
-				border-bottom: 3px solid white;
+				background: #e00;
+				border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 			}
-			h1, .log, .input-area {
+			h1, .log {
 				padding: 0.8rem;
+			}
+			.respond {
+				position: absolute;
+				top: calc(50% - 1rem);
+				left: 100%;
+				background: rgba(255, 255, 255, 0.2);
+				color: white;
+				border: 0;
+				border-radius: 100rem;
+				padding: 0.5rem;
+				width: 2rem;
+				height: 2rem;
+				text-align: center;
+				line-height: 0.5rem;
+				display: none;
+			}
+			.respond::after {
+				position: absolute;
+				top: 50%;
+				height: 30px;
+				margin-top: -15px; 
+				text-align: center;
 			}
 		</style>
 		<h1>MLG CHAT 2K16</h1>
