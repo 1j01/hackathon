@@ -12,7 +12,7 @@ app.get '/', (req, res)->
 port = process.env.PORT ? 3000
 ip = process.env.IP ? "localhost"
 http.listen port, ip, ->
-	console.log "listening on #{ip}:#{port}"
+	console.log "Web server listening on http://#{ip}:#{port}"
 
 bubbles = []
 clients = []
